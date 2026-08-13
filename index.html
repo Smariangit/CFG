@@ -312,7 +312,7 @@
   <div class="round-head round-head-light">
     <span class="round-tag mono">ROUND 04</span>
     <h2 class="round-title">Weigh In</h2>
-    <p class="round-desc">Book a free demo class, or lock in your package now. We'll confirm your slot within a few hours.</p>
+    <p class="round-desc" id="weighinDesc">Book a free demo class, lock in a package, or — if you already train with us — pay your next month's fees.</p>
   </div>
 
   <div class="weighin-grid">
@@ -321,11 +321,18 @@
       <div class="toggle-row" role="tablist" aria-label="Booking type">
         <button type="button" class="toggle-btn is-active" data-mode="demo" id="modeDemo">Free Demo</button>
         <button type="button" class="toggle-btn" data-mode="pay" id="modePay">Buy a Package</button>
+        <button type="button" class="toggle-btn" data-mode="fees" id="modeFees">Pay Fees</button>
+      </div>
+
+      <!-- Existing-student field, shown only in Pay Fees mode -->
+      <div class="field mode-only mode-fees is-hidden" data-mode-field="fees">
+        <label for="fStudentId">Student ID <span class="opt">(or registered phone if unsure)</span></label>
+        <input type="text" id="fStudentId" name="studentId" placeholder="e.g. CFG-0142">
       </div>
 
       <div class="form-row">
         <div class="field">
-          <label for="fName">Full name</label>
+          <label for="fName" id="fNameLabel">Full name</label>
           <input type="text" id="fName" name="name" required placeholder="Your name">
         </div>
         <div class="field">
@@ -339,14 +346,26 @@
           <label for="fEmail">Email</label>
           <input type="email" id="fEmail" name="email" placeholder="you@example.com">
         </div>
-        <div class="field">
+        <div class="field mode-only mode-demo" data-mode-field="demo">
           <label for="fDate">Preferred date</label>
           <input type="date" id="fDate" name="date">
         </div>
       </div>
 
+      <!-- Time slots — demo bookings only -->
+      <div class="field mode-only mode-demo" data-mode-field="demo">
+        <label>Preferred time slot</label>
+        <div class="slot-grid" id="slotGrid">
+          <button type="button" class="slot-btn" data-slot="7:00 AM – 9:00 AM">7 – 9 AM</button>
+          <button type="button" class="slot-btn" data-slot="9:00 AM – 11:00 AM">9 – 11 AM</button>
+          <button type="button" class="slot-btn" data-slot="6:00 PM – 8:00 PM">6 – 8 PM</button>
+          <button type="button" class="slot-btn" data-slot="8:00 PM – 10:00 PM">8 – 10 PM</button>
+        </div>
+        <input type="hidden" id="fSlot" name="slot">
+      </div>
+
       <div class="field">
-        <label for="fPackage">Package</label>
+        <label for="fPackage" id="fPackageLabel">Package</label>
         <select id="fPackage" name="package">
           <option value="Only Gym — 1 Month — ₹1500">Only Gym — 1 Month — ₹1,500</option>
           <option value="Only Gym — 3 Months — ₹4000">Only Gym — 3 Months — ₹4,000</option>
@@ -365,7 +384,7 @@
       <button type="submit" class="btn btn-primary btn-block" id="formSubmit">
         <span id="formSubmitLabel">Book Free Demo</span>
       </button>
-      <p class="form-note">By booking, you agree to a callback from our team to confirm timing. No payment is taken for demo bookings.</p>
+      <p class="form-note" id="formNote">By booking, you agree to a callback from our team to confirm timing. No payment is taken for demo bookings.</p>
     </form>
 
     <aside class="weighin-side">

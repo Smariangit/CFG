@@ -163,20 +163,75 @@
   });
 
   /* ============================================================
-     BOOKING MODE TOGGLE — Free Demo vs Buy a Package
+     BOOKING MODE TOGGLE — Free Demo / Buy a Package / Pay Fees
      ============================================================ */
   const modeDemo = document.getElementById("modeDemo");
+  const modeFees = document.getElementById("modeFees");
   const bookingForm = document.getElementById("bookingForm");
+  const fNameLabel = document.getElementById("fNameLabel");
+  const fPackageLabel = document.getElementById("fPackageLabel");
+  const formNote = document.getElementById("formNote");
+  const weighinDesc = document.getElementById("weighinDesc");
+  const modeFields = document.querySelectorAll("[data-mode-field]");
   let currentMode = "demo";
+
+  const MODE_COPY = {
+    demo: {
+      submit: "Book Free Demo",
+      nameLabel: "Full name",
+      pkgLabel: "Interested package",
+      note: "By booking, you agree to a callback from our team to confirm timing. No payment is taken for demo bookings.",
+      desc: "Book a free demo class, lock in a package, or — if you already train with us — pay your next month's fees."
+    },
+    pay: {
+      submit: "Proceed to Payment",
+      nameLabel: "Full name",
+      pkgLabel: "Package",
+      note: "You'll be taken to a secure payment window to complete your membership purchase.",
+      desc: "Choose your package and cycle, then complete payment securely to lock in your membership."
+    },
+    fees: {
+      submit: "Pay Fees Now",
+      nameLabel: "Full name (as registered)",
+      pkgLabel: "Your membership & cycle",
+      note: "For existing members only. Enter your Student ID so we can match your payment to your account.",
+      desc: "Already training with us? Settle your monthly, quarterly or half-yearly fees securely below."
+    }
+  };
 
   function setMode(mode){
     currentMode = mode;
     modeDemo.classList.toggle("is-active", mode === "demo");
     modePay.classList.toggle("is-active", mode === "pay");
-    formSubmitLabel.textContent = mode === "demo" ? "Book Free Demo" : "Proceed to Payment";
+    modeFees.classList.toggle("is-active", mode === "fees");
+
+    modeFields.forEach(field => {
+      field.classList.toggle("is-hidden", field.dataset.modeField !== mode);
+    });
+
+    const copy = MODE_COPY[mode];
+    formSubmitLabel.textContent = copy.submit;
+    fNameLabel.textContent = copy.nameLabel;
+    fPackageLabel.textContent = copy.pkgLabel;
+    formNote.textContent = copy.note;
+    weighinDesc.textContent = copy.desc;
   }
   modeDemo.addEventListener("click", () => setMode("demo"));
   modePay.addEventListener("click", () => setMode("pay"));
+  modeFees.addEventListener("click", () => setMode("fees"));
+  setMode("demo"); // sync initial state
+
+  /* ============================================================
+     TIME SLOT PICKER (demo bookings)
+     ============================================================ */
+  const fSlot = document.getElementById("fSlot");
+  document.querySelectorAll(".slot-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".slot-btn").forEach(b => b.classList.remove("is-selected"));
+      btn.classList.add("is-selected");
+      fSlot.value = btn.dataset.slot;
+    });
+  });
 
   /* ============================================================
      WALL — drag-to-scroll (mouse) for achievement track
@@ -215,6 +270,31 @@
   modalClose.addEventListener("click", () => modal.classList.remove("is-open"));
   modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("is-open"); });
 
+  function launchRazorpay(amount, description, onSuccess, prefillName, prefillPhone){
+    // In production: call your backend to create a Razorpay Order first
+    // (POST /api/create-order with the amount), get back an order_id,
+    // then pass that order_id below instead of using amount directly.
+    // Razorpay checkout.js must be included for this to run:
+    // <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    if (typeof Razorpay === "undefined" || !amount) {
+      openModal("Payment coming soon.", `We've saved your details (${description}). Our team will reach out to ${prefillPhone} to complete payment securely.`);
+      bookingForm.reset();
+      setMode("demo");
+      return;
+    }
+    const options = {
+      key: "rzp_test_XXXXXXXXXXXX", // TODO: replace with your live/test Razorpay key
+      amount: amount * 100, // paise
+      currency: "INR",
+      name: "Combat Fitness Garage",
+      description,
+      handler: function (){ onSuccess(); },
+      prefill: { name: prefillName, contact: prefillPhone, email: document.getElementById("fEmail").value.trim() },
+      theme: { color: "#c31c2b" }
+    };
+    new Razorpay(options).open();
+  }
+
   bookingForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const name = document.getElementById("fName").value.trim();
@@ -225,48 +305,43 @@
     }
 
     const packageLabel = fPackage.options[fPackage.selectedIndex].text;
-
-    if (currentMode === "demo") {
-      // TODO: replace with a real request to your backend/CRM, e.g.
-      // fetch("/api/bookings", { method:"POST", body: new FormData(bookingForm) })
-      openModal("You're on the books.", `We've logged your free demo request for ${packageLabel.split(" — ")[0]}. Our team will call ${phone} shortly to confirm timing.`);
-      bookingForm.reset();
-      setMode("demo");
-      return;
-    }
-
-    // ---- PAY MODE: Razorpay Checkout hook ----
-    // In production: call your backend to create a Razorpay Order first
-    // (POST /api/create-order with the amount), get back an order_id,
-    // then pass that order_id below instead of using amount directly.
-    // Razorpay checkout.js must be included for this to run:
-    // <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
     const amountInput = document.querySelector(`input[value="${CSS.escape(fPackage.value)}"]`);
     const amount = amountInput ? parseInt(amountInput.dataset.amount, 10) : null;
 
-    if (typeof Razorpay === "undefined" || !amount) {
-      openModal("Payment coming soon.", `We've saved your selection (${packageLabel}). Our team will reach out to ${phone} to complete payment securely.`);
+    if (currentMode === "demo") {
+      if (!fSlot.value) {
+        openModal("Pick a time slot.", "Choose one of the four time slots so we know when to expect you.");
+        return;
+      }
+      // TODO: replace with a real request to your backend/CRM, e.g.
+      // fetch("/api/bookings", { method:"POST", body: new FormData(bookingForm) })
+      openModal("You're on the books.", `We've logged your free demo request for ${packageLabel.split(" — ")[0]} in the ${fSlot.value} slot. Our team will call ${phone} shortly to confirm.`);
       bookingForm.reset();
+      document.querySelectorAll(".slot-btn").forEach(b => b.classList.remove("is-selected"));
       setMode("demo");
       return;
     }
 
-    const options = {
-      key: "rzp_test_XXXXXXXXXXXX", // TODO: replace with your live/test Razorpay key
-      amount: amount * 100, // paise
-      currency: "INR",
-      name: "Combat Fitness Garage",
-      description: packageLabel,
-      handler: function (response){
+    if (currentMode === "pay") {
+      launchRazorpay(amount, packageLabel, () => {
         openModal("Payment received.", `Welcome to CFG. Your ${packageLabel.split(" — ")[0]} membership is confirmed — a receipt is on its way to your email.`);
         bookingForm.reset();
         setMode("demo");
-      },
-      prefill: { name, contact: phone, email: document.getElementById("fEmail").value.trim() },
-      theme: { color: "#c31c2b" }
-    };
-    const rzp = new Razorpay(options);
-    rzp.open();
+      }, name, phone);
+      return;
+    }
+
+    if (currentMode === "fees") {
+      const studentId = document.getElementById("fStudentId").value.trim();
+      // TODO: in production, validate studentId/phone against your members
+      // database on the backend before creating the payment order.
+      launchRazorpay(amount, `Fee payment — ${packageLabel}${studentId ? " — " + studentId : ""}`, () => {
+        openModal("Fees received.", `Thanks${studentId ? ", " + studentId : ""} — your ${packageLabel.split(" — ")[0]} payment is confirmed. A receipt is on its way to your email.`);
+        bookingForm.reset();
+        setMode("demo");
+      }, name, phone);
+      return;
+    }
   });
 
   /* ============================================================

@@ -459,11 +459,39 @@ body.is-loaded .reveal[data-delay="6"]{ animation-delay:.9s; }
 }
 .toggle-row{ display:flex; gap:.5rem; margin-bottom:1.6rem; background:var(--void-2); padding:.3rem; border-radius:5px; }
 .toggle-btn{
-  flex:1; background:none; border:0; color:var(--concrete); padding:.7rem 1rem;
-  font-family:var(--f-cond); font-weight:600; font-size:.85rem; letter-spacing:.04em;
+  flex:1; background:none; border:0; color:var(--concrete); padding:.7rem .6rem;
+  font-family:var(--f-cond); font-weight:600; font-size:.85rem; letter-spacing:.03em;
   text-transform:uppercase; border-radius:4px; transition:background .25s var(--ease), color .25s var(--ease);
 }
 .toggle-btn.is-active{ background:var(--blood); color:var(--tape); }
+.toggle-btn[data-mode="fees"].is-active{ background:var(--caution); color:var(--void); }
+
+/* mode-conditional fields — collapsed smoothly when hidden */
+.mode-only{
+  display:grid; grid-template-rows:1fr; opacity:1;
+  transition:grid-template-rows .3s var(--ease), opacity .25s var(--ease), margin .3s var(--ease);
+}
+.mode-only > *{ overflow:hidden; min-height:0; }
+.mode-only.is-hidden{
+  grid-template-rows:0fr; opacity:0; margin:0 !important; pointer-events:none;
+}
+.mode-only.is-hidden label,
+.mode-only.is-hidden input,
+.mode-only.is-hidden select,
+.mode-only.is-hidden .slot-grid{ margin:0; padding:0; border-width:0; }
+
+/* time-slot pills */
+.slot-grid{ display:grid; grid-template-columns:repeat(2,1fr); gap:.6rem; }
+.slot-btn{
+  background:var(--void-2); border:1px solid var(--line); color:var(--tape-dim);
+  padding:.7rem .6rem; border-radius:4px; font-family:var(--f-mono); font-size:.82rem;
+  transition:border-color .2s var(--ease), color .2s var(--ease), background .2s var(--ease), transform .15s var(--ease);
+}
+.slot-btn:hover{ border-color:var(--concrete-lo); color:var(--tape); }
+.slot-btn.is-selected{
+  border-color:var(--caution); background:rgba(231,180,50,.1); color:var(--tape);
+  transform:translateY(-2px);
+}
 
 .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:1.1rem; }
 .field{ margin-bottom:1.1rem; }
