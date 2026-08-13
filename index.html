@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Combat Fitness Garage — Noida</title>
+<meta name="description" content="Combat Fitness Garage — MMA, Boxing & Strength. Train where fighters are made.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ================= PRELOADER / BELL SEQUENCE ================= -->
+<div class="preloader" id="preloader" aria-hidden="true">
+  <div class="preloader-inner">
+    <span class="pl-word" id="plWord">SECONDS OUT</span>
+    <span class="pl-count" id="plCount">3</span>
+  </div>
+</div>
+
+<!-- ================= ROUND TIMER / SCROLL PROGRESS ================= -->
+<div class="round-timer" aria-hidden="true">
+  <div class="round-timer-fill" id="roundTimerFill"></div>
+</div>
+
+<!-- ================= NAV ================= -->
+<header class="nav" id="siteNav">
+  <a href="#top" class="nav-brand">
+    <span class="nav-brand-mark">CFG</span>
+    <span class="nav-brand-full">COMBAT&nbsp;FITNESS&nbsp;GARAGE</span>
+  </a>
+  <nav class="nav-links">
+    <a href="#garage"><span class="nl-num">01</span>The Garage</a>
+    <a href="#wall"><span class="nl-num">02</span>The Wall</a>
+    <a href="#arsenal"><span class="nl-num">03</span>The Arsenal</a>
+    <a href="#weighin"><span class="nl-num">04</span>Weigh In</a>
+  </nav>
+  <a href="#weighin" class="nav-cta">Book a Demo</a>
+  <button class="nav-burger" id="navBurger" aria-label="Open menu">
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="top">
+  <div class="hero-bg">
+    <div class="hero-stripe s1"></div>
+    <div class="hero-stripe s2"></div>
+    <div class="hero-grain"></div>
+  </div>
+
+  <div class="hero-tape hero-tape-top">
+    <span>NO EXCUSES • NO SHORTCUTS • NO EXCUSES • NO SHORTCUTS • NO EXCUSES • NO SHORTCUTS • </span>
+  </div>
+
+  <div class="hero-content">
+    <p class="hero-eyebrow reveal" data-delay="0">Noida&nbsp;·&nbsp;Est.&nbsp;2019&nbsp;·&nbsp;Combat&nbsp;Fitness&nbsp;Garage</p>
+    <h1 class="hero-title">
+      <span class="reveal" data-delay="1">TRAIN LIKE</span>
+      <span class="reveal hero-title-accent" data-delay="2">THE BELL</span>
+      <span class="reveal" data-delay="3">JUST RANG.</span>
+    </h1>
+    <p class="hero-sub reveal" data-delay="4">A garage-built gym for people who'd rather earn a bruise than skip a session. MMA, boxing and strength — coached by fighters who've actually stood in the ring.</p>
+
+    <div class="hero-actions reveal" data-delay="5">
+      <a href="#weighin" class="btn btn-primary">
+        <span>Book a Free Demo</span>
+      </a>
+      <a href="#arsenal" class="btn btn-ghost">
+        <span>See Packages</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Tale of the tape -->
+  <div class="tape-card reveal" data-delay="6">
+    <div class="tape-row">
+      <div class="tape-stat">
+        <span class="tape-num" data-count="6">0</span>
+        <span class="tape-label">Years Open</span>
+      </div>
+      <div class="tape-div"></div>
+      <div class="tape-stat">
+        <span class="tape-num" data-count="47">0</span>
+        <span class="tape-label">Medals Won</span>
+      </div>
+      <div class="tape-div"></div>
+      <div class="tape-stat">
+        <span class="tape-num" data-count="380">0</span>
+        <span class="tape-label">Fighters Trained</span>
+      </div>
+      <div class="tape-div"></div>
+      <div class="tape-stat">
+        <span class="tape-num" data-count="12">0</span>
+        <span class="tape-label">State Champions</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-cue" aria-hidden="true"><span></span>Scroll</div>
+</section>
+
+<!-- ================= ROUND 01 — THE GARAGE (ABOUT) ================= -->
+<section class="round round-garage" id="garage">
+  <div class="round-head">
+    <span class="round-tag mono">ROUND 01</span>
+    <h2 class="round-title">The Garage</h2>
+  </div>
+
+  <div class="garage-grid">
+    <div class="garage-copy">
+      <p class="garage-lede reveal-on-scroll">CFG didn't start in a glass-front studio. It started in an actual garage — heavy bags hung from ceiling joists, a mismatched set of dumbbells, and a coach who refused to make it comfortable.</p>
+      <p class="reveal-on-scroll">That's still the standard. We kept the name, the concrete floor, and the philosophy: fitness that's tested under pressure, not performed in a mirror. Every class ends the way a round does — when the work is actually done.</p>
+
+      <div class="garage-pillars">
+        <div class="pillar reveal-on-scroll">
+          <span class="pillar-mark mono">/01</span>
+          <h3>Fighter-first coaching</h3>
+          <p>Every coach on the mat has competed. They teach what held up when it mattered.</p>
+        </div>
+        <div class="pillar reveal-on-scroll">
+          <span class="pillar-mark mono">/02</span>
+          <h3>Small classes, real correction</h3>
+          <p>Capped headcounts so your footwork gets fixed, not ignored.</p>
+        </div>
+        <div class="pillar reveal-on-scroll">
+          <span class="pillar-mark mono">/03</span>
+          <h3>Built for progress, not vibes</h3>
+          <p>Sparring logs, strength benchmarks, and a visible path from white-flag to ring-ready.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="garage-visual reveal-on-scroll">
+      <div class="visual-frame">
+        <div class="visual-bagline">
+          <div class="bag"></div><div class="bag"></div><div class="bag"></div>
+        </div>
+        <div class="visual-tape-strip mono">CFG · GARAGE FLOOR · NOIDA</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ROUND 02 — THE WALL (ACHIEVEMENTS) ================= -->
+<section class="round round-wall" id="wall">
+  <div class="round-head round-head-light">
+    <span class="round-tag mono">ROUND 02</span>
+    <h2 class="round-title">The Wall</h2>
+    <p class="round-desc">Every plate on this wall was earned by someone who trained here first. A running record, not a highlight reel.</p>
+  </div>
+
+  <div class="wall-track-wrap">
+    <div class="wall-track" id="wallTrack">
+
+      <article class="card-record reveal-on-scroll">
+        <span class="record-year mono">2024</span>
+        <h3>State MMA Championship — Gold</h3>
+        <p>Featherweight division. Third title for the CFG amateur squad in four years.</p>
+        <span class="record-tag">MMA</span>
+      </article>
+
+      <article class="card-record reveal-on-scroll">
+        <span class="record-year mono">2024</span>
+        <h3>North Zone Boxing Open — Gold ×2</h3>
+        <p>Two golds, one silver across welter and light-heavyweight brackets.</p>
+        <span class="record-tag">Boxing</span>
+      </article>
+
+      <article class="card-record reveal-on-scroll">
+        <span class="record-year mono">2023</span>
+        <h3>National Amateur Circuit — Bronze</h3>
+        <p>First national podium finish for a CFG fighter, at just 8 months of training.</p>
+        <span class="record-tag">MMA</span>
+      </article>
+
+      <article class="card-record reveal-on-scroll">
+        <span class="record-year mono">2023</span>
+        <h3>Inter-Club Boxing League — Champions</h3>
+        <p>CFG's team took the league title across a 6-club roster.</p>
+        <span class="record-tag">Boxing</span>
+      </article>
+
+      <article class="card-record reveal-on-scroll">
+        <span class="record-year mono">2022</span>
+        <h3>State Grappling Invitational — Gold</h3>
+        <p>Two CFG members topped the podium in the no-gi division.</p>
+        <span class="record-tag">MMA</span>
+      </article>
+
+      <article class="card-record reveal-on-scroll">
+        <span class="record-year mono">2021</span>
+        <h3>City Strength Meet — Best Gym Team</h3>
+        <p>Awarded to the highest combined total across five competing gyms.</p>
+        <span class="record-tag">Strength</span>
+      </article>
+
+    </div>
+    <div class="wall-fade wall-fade-l" aria-hidden="true"></div>
+    <div class="wall-fade wall-fade-r" aria-hidden="true"></div>
+  </div>
+  <p class="wall-hint mono">← drag to see the full record →</p>
+</section>
+
+<!-- ================= ROUND 03 — THE ARSENAL (PACKAGES) ================= -->
+<section class="round round-arsenal" id="arsenal">
+  <div class="round-head">
+    <span class="round-tag mono">ROUND 03</span>
+    <h2 class="round-title">The Arsenal</h2>
+    <p class="round-desc">Pick your weight class. Every package includes full access to open mat hours and one free technique review a month.</p>
+  </div>
+
+  <div class="pkg-grid">
+
+    <!-- GYM ONLY -->
+    <article class="pkg-card reveal-on-scroll" data-pkg="Only Gym">
+      <div class="pkg-top">
+        <span class="pkg-class mono">CLASS / 01</span>
+        <h3>Only Gym</h3>
+        <p class="pkg-desc">Strength floor, conditioning circuits, open mat. No martial arts classes included.</p>
+      </div>
+      <ul class="pkg-list">
+        <li>Full strength &amp; conditioning floor</li>
+        <li>Unlimited open-gym hours</li>
+        <li>Monthly progress check-in</li>
+      </ul>
+      <div class="pkg-plans">
+        <label class="plan-opt">
+          <input type="radio" name="plan-onlygym" value="Only Gym — 1 Month — ₹1500" data-amount="1500" checked>
+          <span class="plan-radio"></span>
+          <span class="plan-label">1 Month</span>
+          <span class="plan-price mono">₹1,500</span>
+        </label>
+        <label class="plan-opt">
+          <input type="radio" name="plan-onlygym" value="Only Gym — 3 Months — ₹4000" data-amount="4000">
+          <span class="plan-radio"></span>
+          <span class="plan-label">3 Months</span>
+          <span class="plan-price mono">₹4,000</span>
+        </label>
+      </div>
+      <button class="btn btn-pkg" data-select-pkg="Only Gym">Choose Only Gym</button>
+    </article>
+
+    <!-- MMA -->
+    <article class="pkg-card pkg-featured reveal-on-scroll" data-pkg="MMA">
+      <span class="pkg-badge mono">MOST BOOKED</span>
+      <div class="pkg-top">
+        <span class="pkg-class mono">CLASS / 02</span>
+        <h3>MMA</h3>
+        <p class="pkg-desc">Striking, grappling and cage IQ. Includes full gym floor access.</p>
+      </div>
+      <ul class="pkg-list">
+        <li>Striking, wrestling &amp; ground technique</li>
+        <li>Live sparring sessions (supervised)</li>
+        <li>Full strength &amp; conditioning access</li>
+      </ul>
+      <div class="pkg-plans">
+        <label class="plan-opt">
+          <input type="radio" name="plan-mma" value="MMA — 1 Month — ₹2000" data-amount="2000" checked>
+          <span class="plan-radio"></span>
+          <span class="plan-label">1 Month</span>
+          <span class="plan-price mono">₹2,000</span>
+        </label>
+        <label class="plan-opt">
+          <input type="radio" name="plan-mma" value="MMA — 3 Months — ₹5000" data-amount="5000">
+          <span class="plan-radio"></span>
+          <span class="plan-label">3 Months</span>
+          <span class="plan-price mono">₹5,000</span>
+        </label>
+        <label class="plan-opt">
+          <input type="radio" name="plan-mma" value="MMA — 6 Months — ₹9000" data-amount="9000">
+          <span class="plan-radio"></span>
+          <span class="plan-label">6 Months</span>
+          <span class="plan-price mono">₹9,000</span>
+        </label>
+      </div>
+      <button class="btn btn-pkg btn-pkg-primary" data-select-pkg="MMA">Choose MMA</button>
+    </article>
+
+    <!-- BOXING -->
+    <article class="pkg-card reveal-on-scroll" data-pkg="Boxing">
+      <div class="pkg-top">
+        <span class="pkg-class mono">CLASS / 03</span>
+        <h3>Boxing</h3>
+        <p class="pkg-desc">Footwork, combinations and pad work built around real bout prep.</p>
+      </div>
+      <ul class="pkg-list">
+        <li>Technical boxing &amp; pad rounds</li>
+        <li>Bag work &amp; footwork drills</li>
+        <li>Full strength &amp; conditioning access</li>
+      </ul>
+      <div class="pkg-plans">
+        <label class="plan-opt">
+          <input type="radio" name="plan-boxing" value="Boxing — 1 Month — ₹2000" data-amount="2000" checked>
+          <span class="plan-radio"></span>
+          <span class="plan-label">1 Month</span>
+          <span class="plan-price mono">₹2,000</span>
+        </label>
+      </div>
+      <button class="btn btn-pkg" data-select-pkg="Boxing">Choose Boxing</button>
+    </article>
+
+  </div>
+</section>
+
+<!-- ================= ROUND 04 — WEIGH IN (BOOKING) ================= -->
+<section class="round round-weighin" id="weighin">
+  <div class="round-head round-head-light">
+    <span class="round-tag mono">ROUND 04</span>
+    <h2 class="round-title">Weigh In</h2>
+    <p class="round-desc">Book a free demo class, or lock in your package now. We'll confirm your slot within a few hours.</p>
+  </div>
+
+  <div class="weighin-grid">
+    <form class="booking-form" id="bookingForm" novalidate>
+
+      <div class="toggle-row" role="tablist" aria-label="Booking type">
+        <button type="button" class="toggle-btn is-active" data-mode="demo" id="modeDemo">Free Demo</button>
+        <button type="button" class="toggle-btn" data-mode="pay" id="modePay">Buy a Package</button>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="fName">Full name</label>
+          <input type="text" id="fName" name="name" required placeholder="Your name">
+        </div>
+        <div class="field">
+          <label for="fPhone">Phone number</label>
+          <input type="tel" id="fPhone" name="phone" required placeholder="10-digit mobile">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="fEmail">Email</label>
+          <input type="email" id="fEmail" name="email" placeholder="you@example.com">
+        </div>
+        <div class="field">
+          <label for="fDate">Preferred date</label>
+          <input type="date" id="fDate" name="date">
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="fPackage">Package</label>
+        <select id="fPackage" name="package">
+          <option value="Only Gym — 1 Month — ₹1500">Only Gym — 1 Month — ₹1,500</option>
+          <option value="Only Gym — 3 Months — ₹4000">Only Gym — 3 Months — ₹4,000</option>
+          <option value="MMA — 1 Month — ₹2000" selected>MMA — 1 Month — ₹2,000</option>
+          <option value="MMA — 3 Months — ₹5000">MMA — 3 Months — ₹5,000</option>
+          <option value="MMA — 6 Months — ₹9000">MMA — 6 Months — ₹9,000</option>
+          <option value="Boxing — 1 Month — ₹2000">Boxing — 1 Month — ₹2,000</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label for="fMsg">Anything we should know? <span class="opt">(optional)</span></label>
+        <textarea id="fMsg" name="message" rows="3" placeholder="Prior experience, injuries, preferred timing…"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" id="formSubmit">
+        <span id="formSubmitLabel">Book Free Demo</span>
+      </button>
+      <p class="form-note">By booking, you agree to a callback from our team to confirm timing. No payment is taken for demo bookings.</p>
+    </form>
+
+    <aside class="weighin-side">
+      <div class="side-card">
+        <h3 class="mono">Corner Info</h3>
+        <ul class="side-list">
+          <li><span>Hours</span><span>Mon–Sat · 6AM–10PM</span></li>
+          <li><span>Location</span><span>Sector 63, Noida</span></li>
+          <li><span>Trial</span><span>First class is free</span></li>
+        </ul>
+      </div>
+      <div class="side-card side-card-accent">
+        <h3 class="mono">Direct Line</h3>
+        <p>Prefer to talk it through first?</p>
+        <a href="tel:+919999999999" class="side-link">+91 99999 99999</a>
+        <a href="https://wa.me/919999999999" class="side-link" target="_blank" rel="noopener">Message on WhatsApp →</a>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ================= SUCCESS MODAL ================= -->
+<div class="modal-overlay" id="successModal" aria-hidden="true">
+  <div class="modal-box">
+    <div class="modal-bell" aria-hidden="true">
+      <svg viewBox="0 0 64 64" width="56" height="56"><path d="M32 6c-3 0-5 2-5 5v2c-9 2-14 9-14 19v10l-5 7h48l-5-7V32c0-10-5-17-14-19V11c0-3-2-5-5-5z" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/><path d="M25 51a7 7 0 0 0 14 0" fill="none" stroke="currentColor" stroke-width="3"/></svg>
+    </div>
+    <h3 id="modalTitle">You're on the books.</h3>
+    <p id="modalBody">We've got your details — our team will call you shortly to confirm your slot.</p>
+    <button class="btn btn-primary" id="modalClose">Done</button>
+  </div>
+</div>
+
+<!-- ================= FOOTER — THE CORNER ================= -->
+<footer class="footer" id="corner">
+  <div class="footer-bell-row">
+    <span class="footer-bell mono">◐</span>
+    <span class="mono">END OF ROUND</span>
+    <span class="footer-bell mono">◐</span>
+  </div>
+
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <span class="nav-brand-mark">CFG</span>
+      <p>Combat Fitness Garage — Sector 63, Noida. Training fighters and everyday people since 2019.</p>
+    </div>
+
+    <div class="footer-col">
+      <h4 class="mono">Find Us</h4>
+      <a href="https://maps.google.com/?q=Combat+Fitness+Garage+Sector+63+Noida" target="_blank" rel="noopener">Location on Google Maps →</a>
+      <a href="#top">Sector 63, Noida, UP</a>
+    </div>
+
+    <div class="footer-col">
+      <h4 class="mono">Follow</h4>
+      <a href="https://instagram.com/combatfitnessgarage" target="_blank" rel="noopener">Instagram →</a>
+      <a href="https://wa.me/919999999999" target="_blank" rel="noopener">WhatsApp →</a>
+    </div>
+
+    <div class="footer-col">
+      <h4 class="mono">Owner / Head Coach</h4>
+      <a href="tel:+919999999999">+91 99999 99999</a>
+      <a href="mailto:coach@combatfitnessgarage.in">coach@combatfitnessgarage.in</a>
+    </div>
+  </div>
+
+  <div class="footer-bottom mono">
+    <span>© <span id="year"></span> Combat Fitness Garage</span>
+    <span>Built in the garage, not a boardroom.</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
