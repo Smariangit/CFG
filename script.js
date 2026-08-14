@@ -22,7 +22,7 @@
       if (n <= 0) {
         plWord.textContent = "FIGHT";
         plCount.textContent = "";
-        plWord.style.color = "var(--blood-hi)";
+        plWord.style.color = "var(--brand-hi)";
         plWord.style.fontSize = "2.2rem";
         plWord.style.fontFamily = "var(--f-display)";
         plWord.style.letterSpacing = "0.04em";
@@ -290,7 +290,7 @@
       description,
       handler: function (){ onSuccess(); },
       prefill: { name: prefillName, contact: prefillPhone, email: document.getElementById("fEmail").value.trim() },
-      theme: { color: "#c31c2b" }
+      theme: { color: "#1e9e5c" }
     };
     new Razorpay(options).open();
   }
