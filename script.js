@@ -234,6 +234,23 @@
   });
 
   /* ============================================================
+     THE GRIND — highlight gallery filters (All / Photos / Clips)
+     ============================================================ */
+  const grindFilters = document.querySelectorAll(".grind-filter");
+  const grindTiles = document.querySelectorAll(".grind-tile");
+  grindFilters.forEach(btn => {
+    btn.addEventListener("click", () => {
+      grindFilters.forEach(b => b.classList.remove("is-active"));
+      btn.classList.add("is-active");
+      const filter = btn.dataset.filter;
+      grindTiles.forEach(tile => {
+        const match = filter === "all" || tile.dataset.type === filter;
+        tile.classList.toggle("is-filtered-out", !match);
+      });
+    });
+  });
+
+  /* ============================================================
      WALL — drag-to-scroll (mouse) for achievement track
      ============================================================ */
   const wallTrack = document.getElementById("wallTrack");

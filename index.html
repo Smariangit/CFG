@@ -36,8 +36,9 @@
   <nav class="nav-links">
     <a href="#garage"><span class="nl-num">01</span>The Garage</a>
     <a href="#wall"><span class="nl-num">02</span>The Wall</a>
-    <a href="#arsenal"><span class="nl-num">03</span>The Arsenal</a>
-    <a href="#weighin"><span class="nl-num">04</span>Weigh In</a>
+    <a href="#grind"><span class="nl-num">03</span>The Grind</a>
+    <a href="#arsenal"><span class="nl-num">04</span>The Arsenal</a>
+    <a href="#weighin"><span class="nl-num">05</span>Weigh In</a>
   </nav>
   <a href="#weighin" class="nav-cta">Book a Demo</a>
   <button class="nav-burger" id="navBurger" aria-label="Open menu">
@@ -157,6 +158,14 @@
   <div class="wall-track-wrap">
     <div class="wall-track" id="wallTrack">
 
+      <article class="card-record card-record-intl reveal-on-scroll">
+        <span class="record-intl-badge mono">INTERNATIONAL</span>
+        <span class="record-year mono">2025</span>
+        <h3>International Amateur MMA Championship — Bronze</h3>
+        <p>CFG's first fighter to medal on the international stage — a bronze that put the garage on the map.</p>
+        <span class="record-tag record-tag-intl">MMA</span>
+      </article>
+
       <article class="card-record reveal-on-scroll">
         <span class="record-year mono">2024</span>
         <h3>State MMA Championship — Gold</h3>
@@ -206,10 +215,80 @@
   <p class="wall-hint mono">← drag to see the full record →</p>
 </section>
 
-<!-- ================= ROUND 03 — THE ARSENAL (PACKAGES) ================= -->
-<section class="round round-arsenal" id="arsenal">
+<!-- ================= ROUND 03 — THE GRIND (TRAINING SNAPS / HIGHLIGHTS) ================= -->
+<section class="round round-grind" id="grind">
   <div class="round-head">
     <span class="round-tag mono">ROUND 03</span>
+    <h2 class="round-title">The Grind</h2>
+    <p class="round-desc">The Wall shows the podium. This is everything that happens before it — sparring rounds, sunrise conditioning, first classes, and the sessions nobody was filming for a medal.</p>
+  </div>
+
+  <div class="grind-filters" role="tablist" aria-label="Filter highlights">
+    <button type="button" class="grind-filter is-active" data-filter="all">All</button>
+    <button type="button" class="grind-filter" data-filter="photo">Photos</button>
+    <button type="button" class="grind-filter" data-filter="video">Clips</button>
+  </div>
+
+  <div class="grind-grid" id="grindGrid">
+
+    <figure class="grind-tile g-tall reveal-on-scroll" data-type="photo">
+      <div class="grind-media grind-ph-1"></div>
+      <figcaption>Sunrise conditioning batch <span class="mono">· 6 AM</span></figcaption>
+    </figure>
+
+    <figure class="grind-tile reveal-on-scroll" data-type="video">
+      <div class="grind-media grind-ph-2">
+        <span class="grind-play" aria-hidden="true">▶</span>
+        <span class="grind-duration mono">0:42</span>
+      </div>
+      <figcaption>Pad-work combo breakdown</figcaption>
+    </figure>
+
+    <figure class="grind-tile reveal-on-scroll" data-type="photo">
+      <div class="grind-media grind-ph-3"></div>
+      <figcaption>First class nerves, week one</figcaption>
+    </figure>
+
+    <figure class="grind-tile g-wide reveal-on-scroll" data-type="video">
+      <div class="grind-media grind-ph-4">
+        <span class="grind-play" aria-hidden="true">▶</span>
+        <span class="grind-duration mono">1:15</span>
+      </div>
+      <figcaption>Live sparring — Saturday open mat</figcaption>
+    </figure>
+
+    <figure class="grind-tile reveal-on-scroll" data-type="photo">
+      <div class="grind-media grind-ph-5"></div>
+      <figcaption>Hand-wrap ritual, pre-session</figcaption>
+    </figure>
+
+    <figure class="grind-tile reveal-on-scroll" data-type="photo">
+      <div class="grind-media grind-ph-6"></div>
+      <figcaption>Strength floor, heavy day</figcaption>
+    </figure>
+
+    <figure class="grind-tile reveal-on-scroll" data-type="video">
+      <div class="grind-media grind-ph-7">
+        <span class="grind-play" aria-hidden="true">▶</span>
+        <span class="grind-duration mono">0:58</span>
+      </div>
+      <figcaption>Footwork drill, beginner batch</figcaption>
+    </figure>
+
+    <figure class="grind-tile reveal-on-scroll" data-type="photo">
+      <div class="grind-media grind-ph-8"></div>
+      <figcaption>Cooldown &amp; mobility work</figcaption>
+    </figure>
+
+  </div>
+
+  <p class="grind-note mono">Swap these tiles for your own photos and clips — see the code comments in script.js / index.html.</p>
+</section>
+
+<!-- ================= ROUND 04 — THE ARSENAL (PACKAGES) ================= -->
+<section class="round round-arsenal" id="arsenal">
+  <div class="round-head">
+    <span class="round-tag mono">ROUND 04</span>
     <h2 class="round-title">The Arsenal</h2>
     <p class="round-desc">Pick your weight class. Every package includes full access to open mat hours and one free technique review a month.</p>
   </div>
@@ -240,6 +319,12 @@
           <span class="plan-radio"></span>
           <span class="plan-label">3 Months</span>
           <span class="plan-price mono">₹4,000</span>
+        </label>
+        <label class="plan-opt">
+          <input type="radio" name="plan-onlygym" value="Only Gym — 6 Months — ₹7500" data-amount="7500">
+          <span class="plan-radio"></span>
+          <span class="plan-label">6 Months</span>
+          <span class="plan-price mono">₹7,500</span>
         </label>
       </div>
       <button class="btn btn-pkg" data-select-pkg="Only Gym">Choose Only Gym</button>
@@ -300,6 +385,18 @@
           <span class="plan-label">1 Month</span>
           <span class="plan-price mono">₹2,000</span>
         </label>
+        <label class="plan-opt">
+          <input type="radio" name="plan-boxing" value="Boxing — 3 Months — ₹5000" data-amount="5000">
+          <span class="plan-radio"></span>
+          <span class="plan-label">3 Months</span>
+          <span class="plan-price mono">₹5,000</span>
+        </label>
+        <label class="plan-opt">
+          <input type="radio" name="plan-boxing" value="Boxing — 6 Months — ₹9000" data-amount="9000">
+          <span class="plan-radio"></span>
+          <span class="plan-label">6 Months</span>
+          <span class="plan-price mono">₹9,000</span>
+        </label>
       </div>
       <button class="btn btn-pkg" data-select-pkg="Boxing">Choose Boxing</button>
     </article>
@@ -307,10 +404,10 @@
   </div>
 </section>
 
-<!-- ================= ROUND 04 — WEIGH IN (BOOKING) ================= -->
+<!-- ================= ROUND 05 — WEIGH IN (BOOKING) ================= -->
 <section class="round round-weighin" id="weighin">
   <div class="round-head round-head-light">
-    <span class="round-tag mono">ROUND 04</span>
+    <span class="round-tag mono">ROUND 05</span>
     <h2 class="round-title">Weigh In</h2>
     <p class="round-desc" id="weighinDesc">Book a free demo class, lock in a package, or — if you already train with us — pay your next month's fees.</p>
   </div>
@@ -369,10 +466,13 @@
         <select id="fPackage" name="package">
           <option value="Only Gym — 1 Month — ₹1500">Only Gym — 1 Month — ₹1,500</option>
           <option value="Only Gym — 3 Months — ₹4000">Only Gym — 3 Months — ₹4,000</option>
+          <option value="Only Gym — 6 Months — ₹7500">Only Gym — 6 Months — ₹7,500</option>
           <option value="MMA — 1 Month — ₹2000" selected>MMA — 1 Month — ₹2,000</option>
           <option value="MMA — 3 Months — ₹5000">MMA — 3 Months — ₹5,000</option>
           <option value="MMA — 6 Months — ₹9000">MMA — 6 Months — ₹9,000</option>
           <option value="Boxing — 1 Month — ₹2000">Boxing — 1 Month — ₹2,000</option>
+          <option value="Boxing — 3 Months — ₹5000">Boxing — 3 Months — ₹5,000</option>
+          <option value="Boxing — 6 Months — ₹9000">Boxing — 6 Months — ₹9,000</option>
         </select>
       </div>
 

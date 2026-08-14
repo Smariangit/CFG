@@ -383,13 +383,94 @@ body.is-loaded .reveal[data-delay="6"]{ animation-delay:.9s; }
   border:1px solid var(--line); padding:.25rem .6rem; border-radius:20px;
 }
 
+/* International medalist — pinned, distinct */
+.card-record-intl{
+  border-color:var(--caution);
+  background:linear-gradient(160deg, #241d10, var(--void) 55%);
+}
+.card-record-intl:hover{ border-color:var(--caution); }
+.record-intl-badge{
+  display:inline-block; font-size:.62rem; letter-spacing:.14em;
+  color:var(--void); background:var(--caution);
+  padding:.3rem .6rem; border-radius:20px; margin-bottom:.7rem;
+}
+.record-tag-intl{ border-color:var(--caution); color:var(--caution); }
+
 .wall-fade{ position:absolute; top:0; bottom:1.5rem; width:60px; pointer-events:none; z-index:2; }
 .wall-fade-l{ left:0; background:linear-gradient(90deg, var(--void-2), transparent); }
 .wall-fade-r{ right:0; background:linear-gradient(-90deg, var(--void-2), transparent); }
 .wall-hint{ text-align:center; font-size:.7rem; color:var(--concrete-lo); letter-spacing:.1em; margin:0 0 1rem; }
 
 /* =========================================================
-   ROUND 03 — THE ARSENAL (packages)
+   ROUND 03 — THE GRIND (training snaps / highlights)
+   ========================================================= */
+.round-grind{ background:var(--void); }
+
+.grind-filters{ display:flex; gap:.6rem; margin-bottom:2rem; }
+.grind-filter{
+  background:var(--void-2); border:1px solid var(--line); color:var(--concrete);
+  font-family:var(--f-cond); font-weight:600; font-size:.82rem; letter-spacing:.04em;
+  text-transform:uppercase; padding:.55rem 1.2rem; border-radius:20px;
+  transition:border-color .2s var(--ease), color .2s var(--ease), background .2s var(--ease);
+}
+.grind-filter:hover{ border-color:var(--concrete-lo); color:var(--tape); }
+.grind-filter.is-active{ background:var(--brand); border-color:var(--brand); color:var(--tape); }
+
+.grind-grid{
+  display:grid; grid-template-columns:repeat(4, 1fr);
+  grid-auto-rows:170px; gap:1rem;
+}
+.grind-tile{
+  margin:0; position:relative; border-radius:6px; overflow:hidden;
+  grid-column:span 1; grid-row:span 1; cursor:pointer;
+  transition:transform .3s var(--ease), opacity .3s var(--ease);
+}
+.grind-tile.g-wide{ grid-column:span 2; }
+.grind-tile.g-tall{ grid-row:span 2; }
+.grind-tile.is-filtered-out{
+  display:none;
+}
+.grind-tile:hover{ transform:scale(1.02); }
+.grind-tile:hover .grind-media{ transform:scale(1.08); }
+
+.grind-media{
+  position:absolute; inset:0; transition:transform .5s var(--ease);
+  display:flex; align-items:center; justify-content:center; gap:.5rem;
+  background:var(--void-2);
+}
+/* Placeholder textures — swap each for a real background-image / <img> / <video> poster */
+.grind-ph-1{ background:linear-gradient(150deg,#1b2a20,#101112); }
+.grind-ph-2{ background:linear-gradient(150deg,#241d10,#101112); }
+.grind-ph-3{ background:linear-gradient(150deg,#1a1c22,#101112); }
+.grind-ph-4{ background:linear-gradient(150deg,#152a1c,#101112); }
+.grind-ph-5{ background:linear-gradient(150deg,#221d12,#101112); }
+.grind-ph-6{ background:linear-gradient(150deg,#1c2016,#101112); }
+.grind-ph-7{ background:linear-gradient(150deg,#151f2a,#101112); }
+.grind-ph-8{ background:linear-gradient(150deg,#231a1e,#101112); }
+
+.grind-play{
+  width:44px; height:44px; border-radius:50%; background:rgba(239,233,224,.14);
+  border:1px solid rgba(239,233,224,.35); color:var(--tape);
+  display:flex; align-items:center; justify-content:center; font-size:.85rem;
+  backdrop-filter:blur(3px); transition:background .2s var(--ease), transform .2s var(--ease);
+}
+.grind-tile:hover .grind-play{ background:var(--brand); border-color:var(--brand); transform:scale(1.08); }
+.grind-duration{
+  position:absolute; bottom:.6rem; right:.7rem; font-size:.66rem; color:var(--tape);
+  background:rgba(0,0,0,.55); padding:.2rem .45rem; border-radius:3px;
+}
+.grind-tile figcaption{
+  position:absolute; left:0; right:0; bottom:0; z-index:2;
+  padding:.7rem .8rem .6rem; font-family:var(--f-cond); font-size:.82rem; color:var(--tape);
+  background:linear-gradient(to top, rgba(0,0,0,.75), transparent);
+  opacity:0; transform:translateY(6px);
+  transition:opacity .25s var(--ease), transform .25s var(--ease);
+}
+.grind-tile:hover figcaption{ opacity:1; transform:translateY(0); }
+.grind-note{ margin-top:1.6rem; font-size:.68rem; color:var(--concrete-lo); letter-spacing:.05em; }
+
+/* =========================================================
+   ROUND 04 — THE ARSENAL (packages)
    ========================================================= */
 .round-arsenal .round-head{ text-align:left; }
 .pkg-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1.6rem; align-items:stretch; }
@@ -572,6 +653,8 @@ body.is-loaded .reveal[data-delay="6"]{ animation-delay:.9s; }
 @media (max-width: 980px){
   .garage-grid{ grid-template-columns:1fr; }
   .garage-visual{ position:static; order:-1; }
+  .grind-grid{ grid-template-columns:repeat(2,1fr); grid-auto-rows:200px; }
+  .grind-tile.g-wide{ grid-column:span 2; }
   .pkg-grid{ grid-template-columns:1fr; }
   .weighin-grid{ grid-template-columns:1fr; }
   .weighin-side{ position:static; }
@@ -591,6 +674,8 @@ body.is-loaded .reveal[data-delay="6"]{ animation-delay:.9s; }
   .form-row{ grid-template-columns:1fr; }
   .tape-row{ gap:1.4rem; }
   .tape-div{ display:none; }
+  .grind-grid{ grid-template-columns:1fr 1fr; grid-auto-rows:150px; }
+  .grind-tile.g-tall{ grid-row:span 1; }
   .footer-grid{ grid-template-columns:1fr; }
   .footer-bottom{ flex-direction:column; text-align:center; }
 }
