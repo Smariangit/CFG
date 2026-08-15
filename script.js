@@ -251,22 +251,28 @@
   });
 
   /* ============================================================
-     WALL — drag-to-scroll (mouse) for achievement track
+     DRAG-TO-SCROLL — shared helper for horizontal tracks
+     (Wall achievements + Grind highlights). Guarded so this is
+     safe to include on pages that don't have one of these tracks.
      ============================================================ */
-  const wallTrack = document.getElementById("wallTrack");
-  let isDown = false, startX, scrollLeft;
-  wallTrack.addEventListener("mousedown", (e) => {
-    isDown = true;
-    startX = e.pageX - wallTrack.offsetLeft;
-    scrollLeft = wallTrack.scrollLeft;
-  });
-  ["mouseleave", "mouseup"].forEach(evt => wallTrack.addEventListener(evt, () => isDown = false));
-  wallTrack.addEventListener("mousemove", (e) => {
-    if (!isDown) return;
-    e.preventDefault();
-    const x = e.pageX - wallTrack.offsetLeft;
-    wallTrack.scrollLeft = scrollLeft - (x - startX) * 1.4;
-  });
+  function attachDragScroll(track){
+    if (!track) return;
+    let isDown = false, startX, scrollLeft;
+    track.addEventListener("mousedown", (e) => {
+      isDown = true;
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+    });
+    ["mouseleave", "mouseup"].forEach(evt => track.addEventListener(evt, () => isDown = false));
+    track.addEventListener("mousemove", (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - track.offsetLeft;
+      track.scrollLeft = scrollLeft - (x - startX) * 1.4;
+    });
+  }
+  attachDragScroll(document.getElementById("wallTrack"));
+  attachDragScroll(document.getElementById("grindTrack"));
 
   /* ============================================================
      BOOKING FORM SUBMIT
@@ -307,7 +313,7 @@
       description,
       handler: function (){ onSuccess(); },
       prefill: { name: prefillName, contact: prefillPhone, email: document.getElementById("fEmail").value.trim() },
-      theme: { color: "#1e9e5c" }
+      theme: { color: "#86c232" }
     };
     new Razorpay(options).open();
   }
