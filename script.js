@@ -276,9 +276,10 @@
 
   /* ============================================================
      BOOKING FORM SUBMIT
-     — Demo mode: mock confirmation (wire to your backend / CRM here)
-     — Pay mode: Razorpay checkout hook (needs a backend to create
-       the order_id in production — see comment below)
+     — Demo mode: mock confirmation + owner notification via
+       Google Apps Script (see appscript/Code.gs)
+     — Pay / Fees mode: Cashfree checkout hook (needs a small
+       backend to mint a payment_session_id — see comments below)
      ============================================================ */
   const modal = document.getElementById("successModal");
   const modalTitle = document.getElementById("modalTitle");
@@ -293,29 +294,78 @@
   modalClose.addEventListener("click", () => modal.classList.remove("is-open"));
   modal.addEventListener("click", (e) => { if (e.target === modal) modal.classList.remove("is-open"); });
 
-  function launchRazorpay(amount, description, onSuccess, prefillName, prefillPhone){
-    // In production: call your backend to create a Razorpay Order first
-    // (POST /api/create-order with the amount), get back an order_id,
-    // then pass that order_id below instead of using amount directly.
-    // Razorpay checkout.js must be included for this to run:
-    // <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    if (typeof Razorpay === "undefined" || !amount) {
+  /* ---- Cashfree config — fill in once your backend exists ---- */
+  const CASHFREE_CONFIG = {
+    mode: "sandbox", // TODO: switch to "production" when you go live
+    // Cashfree checkout needs a payment_session_id minted server-side
+    // (via Cashfree's Create Order API, using your App ID + Secret Key —
+    // never put the Secret Key in frontend code). Point this at that
+    // backend endpoint once it exists; until then, checkout falls back
+    // to a "we'll contact you" message so the form still works end-to-end.
+    createOrderEndpoint: "/api/create-cashfree-order"
+  };
+
+  async function launchCashfree(amount, description, onSuccess, prefillName, prefillPhone){
+    // Cashfree's Drop-in checkout SDK must be included for this to run:
+    // <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
+    // (already added in index.html, right before this file)
+    if (typeof Cashfree === "undefined" || !amount) {
       openModal("Payment coming soon.", `We've saved your details (${description}). Our team will reach out to ${prefillPhone} to complete payment securely.`);
       bookingForm.reset();
       setMode("demo");
       return;
     }
-    const options = {
-      key: "rzp_test_XXXXXXXXXXXX", // TODO: replace with your live/test Razorpay key
-      amount: amount * 100, // paise
-      currency: "INR",
-      name: "Combat Fitness Garage",
-      description,
-      handler: function (){ onSuccess(); },
-      prefill: { name: prefillName, contact: prefillPhone, email: document.getElementById("fEmail").value.trim() },
-      theme: { color: "#86c232" }
-    };
-    new Razorpay(options).open();
+
+    try {
+      const res = await fetch(CASHFREE_CONFIG.createOrderEndpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          amount,
+          currency: "INR",
+          customer_name: prefillName,
+          customer_phone: prefillPhone,
+          customer_email: document.getElementById("fEmail").value.trim(),
+          description
+        })
+      });
+      const order = await res.json();
+      if (!order || !order.payment_session_id) throw new Error("No payment_session_id returned");
+
+      const cashfree = Cashfree({ mode: CASHFREE_CONFIG.mode });
+      const result = await cashfree.checkout({
+        paymentSessionId: order.payment_session_id,
+        redirectTarget: "_modal"
+      });
+      if (result && result.error) {
+        openModal("Payment not completed.", "Your payment was cancelled or didn't go through — no charge was made. You can try again anytime.");
+        return;
+      }
+      onSuccess();
+    } catch (err) {
+      // Expected until CASHFREE_CONFIG.createOrderEndpoint is wired up to a real backend.
+      openModal("Payment coming soon.", `We've saved your details (${description}). Our team will reach out to ${prefillPhone} to complete payment securely.`);
+      bookingForm.reset();
+      setMode("demo");
+    }
+  }
+
+  /* ---- Google Apps Script — free-demo notification to the owner ---- */
+  // Deploy appscript/Code.gs as a Web App (Deploy → New deployment → Web app,
+  // execute as yourself, access "Anyone"), then paste the resulting URL below.
+  const APPS_SCRIPT_URL = "PASTE_YOUR_DEPLOYED_APPS_SCRIPT_WEB_APP_URL_HERE";
+
+  function notifyOwnerOfDemoBooking(payload){
+    if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.indexOf("PASTE_YOUR") === 0) return;
+    // mode:"no-cors" is required for a plain fetch to an Apps Script Web
+    // App from the browser — the response is opaque, but the request
+    // still reaches the script and triggers the email.
+    fetch(APPS_SCRIPT_URL, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "text/plain" },
+      body: JSON.stringify(payload)
+    }).catch(() => { /* best-effort — the booking itself still succeeds locally */ });
   }
 
   bookingForm.addEventListener("submit", (e) => {
@@ -336,7 +386,16 @@
         openModal("Pick a time slot.", "Choose one of the four time slots so we know when to expect you.");
         return;
       }
-      // TODO: replace with a real request to your backend/CRM, e.g.
+      notifyOwnerOfDemoBooking({
+        name, phone,
+        email: document.getElementById("fEmail").value.trim(),
+        package: packageLabel,
+        date: document.getElementById("fDate").value,
+        slot: fSlot.value,
+        message: document.getElementById("fMsg").value.trim()
+      });
+      // TODO: also wire this to your own backend/CRM if you want a
+      // system of record beyond the email notification, e.g.
       // fetch("/api/bookings", { method:"POST", body: new FormData(bookingForm) })
       openModal("You're on the books.", `We've logged your free demo request for ${packageLabel.split(" — ")[0]} in the ${fSlot.value} slot. Our team will call ${phone} shortly to confirm.`);
       bookingForm.reset();
@@ -346,7 +405,7 @@
     }
 
     if (currentMode === "pay") {
-      launchRazorpay(amount, packageLabel, () => {
+      launchCashfree(amount, packageLabel, () => {
         openModal("Payment received.", `Welcome to CFG. Your ${packageLabel.split(" — ")[0]} membership is confirmed — a receipt is on its way to your email.`);
         bookingForm.reset();
         setMode("demo");
@@ -358,7 +417,7 @@
       const studentId = document.getElementById("fStudentId").value.trim();
       // TODO: in production, validate studentId/phone against your members
       // database on the backend before creating the payment order.
-      launchRazorpay(amount, `Fee payment — ${packageLabel}${studentId ? " — " + studentId : ""}`, () => {
+      launchCashfree(amount, `Fee payment — ${packageLabel}${studentId ? " — " + studentId : ""}`, () => {
         openModal("Fees received.", `Thanks${studentId ? ", " + studentId : ""} — your ${packageLabel.split(" — ")[0]} payment is confirmed. A receipt is on its way to your email.`);
         bookingForm.reset();
         setMode("demo");

@@ -523,39 +523,16 @@ body.is-loaded .reveal[data-delay="6"]{ animation-delay:.9s; }
 .pkg-card{
   background:var(--void-2); border:1px solid var(--line); border-radius:6px;
   padding:2rem 1.7rem; display:flex; flex-direction:column;
-  position:relative; overflow:hidden;
+  position:relative;
   transition:transform .35s var(--ease-out-back), border-color .3s var(--ease), box-shadow .35s var(--ease);
 }
 .pkg-card:hover{ transform:translateY(-8px) rotate(-.3deg); border-color:var(--concrete-lo); box-shadow:0 18px 40px -18px rgba(0,0,0,.6); }
 .pkg-featured{ border-color:var(--brand); background:linear-gradient(180deg, #1d2410, var(--void-2) 40%); }
 .pkg-featured:hover{ border-color:var(--brand-hi); transform:translateY(-10px) rotate(.3deg); }
 .pkg-badge{
-  position:absolute; top:.9rem; right:1.1rem; z-index:3; background:var(--brand);
+  position:absolute; top:-.8rem; right:1.6rem; background:var(--brand);
   color:var(--void); font-size:.65rem; letter-spacing:.1em; padding:.35rem .7rem; border-radius:20px;
 }
-
-/* Package visual header — swap each background for a real training photo */
-.pkg-media{
-  margin:-2rem -1.7rem 1.5rem; height:132px; position:relative;
-  display:flex; align-items:center; justify-content:center; overflow:hidden;
-  color:var(--brand-hi);
-}
-.pkg-media::before{
-  content:""; position:absolute; inset:0;
-  background-image:repeating-linear-gradient(135deg, rgba(255,255,255,.03) 0 2px, transparent 2px 12px);
-}
-.pkg-media::after{
-  content:""; position:absolute; left:0; right:0; bottom:0; height:40%;
-  background:linear-gradient(to top, var(--void-2), transparent);
-}
-.pkg-media svg{ position:relative; z-index:1; }
-.pm-gym{ background:linear-gradient(150deg,#1c1d20,#101112); }
-.pm-mma{ background:linear-gradient(150deg,#1d2410,#101112); }
-.pm-boxing{ background:linear-gradient(150deg,#241d10,#101112); }
-.pm-bjj{ background:linear-gradient(150deg,#101c1a,#101112); }
-.pm-wrestling{ background:linear-gradient(150deg,#1c1710,#101112); }
-.pm-kickboxing{ background:linear-gradient(150deg,#161d24,#101112); }
-.pkg-featured .pkg-media::after{ background:linear-gradient(to top, #1d2410, transparent); }
 
 .pkg-class{ color:var(--concrete-lo); font-size:.68rem; letter-spacing:.12em; }
 .pkg-top h3{ font-family:var(--f-display); font-weight:400; text-transform:uppercase; font-size:1.9rem; margin:.4rem 0 .6rem; }
