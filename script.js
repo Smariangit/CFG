@@ -353,7 +353,7 @@
   /* ---- Google Apps Script — free-demo notification to the owner ---- */
   // Deploy appscript/Code.gs as a Web App (Deploy → New deployment → Web app,
   // execute as yourself, access "Anyone"), then paste the resulting URL below.
-  const APPS_SCRIPT_URL = "PASTE_YOUR_DEPLOYED_APPS_SCRIPT_WEB_APP_URL_HERE";
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzEZTNDNyu2hUEb4ApoX09zIVEBtMSCUw5WC-bW08f7phl193hbOxaSUQjCIYxcGu9-/exec";
 
   function notifyOwnerOfDemoBooking(payload){
     if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.indexOf("PASTE_YOUR") === 0) return;
