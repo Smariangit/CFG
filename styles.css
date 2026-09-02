@@ -383,25 +383,41 @@ body.is-loaded .reveal[data-delay="6"]{ animation-delay:.9s; }
 .card-record{
   flex:0 0 300px; scroll-snap-align:start;
   background:var(--void); border:1px solid var(--line); border-radius:4px;
-  padding:1.6rem; position:relative;
+  padding:1.6rem; position:relative; overflow:hidden;
+  min-height:230px; display:flex; flex-direction:column; justify-content:flex-end;
   transition:transform .3s var(--ease-out-back), border-color .3s var(--ease);
 }
 .card-record:hover{ transform:translateY(-6px); border-color:var(--brand); }
+.card-record:hover .record-bg img{ transform:scale(1.06); }
+
+/* Achievement photo sits behind the copy; scrim keeps captions/headings legible */
+.record-bg{ position:absolute; inset:0; z-index:0; }
+.record-bg img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  transition:transform .5s var(--ease);
+}
+.record-bg::after{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(180deg, rgba(19,19,21,.25) 0%, rgba(19,19,21,.55) 45%, rgba(15,16,18,.94) 100%);
+}
+.card-record > *:not(.record-bg){ position:relative; z-index:1; }
+
 .record-year{ color:var(--caution); font-size:.78rem; }
 .card-record h3{ font-family:var(--f-cond); font-weight:700; font-size:1.12rem; line-height:1.25; margin:.6rem 0 .6rem; text-transform:uppercase; }
-.card-record p{ color:var(--concrete); font-size:.9rem; margin:0 0 1.1rem; }
+.card-record p{ color:var(--tape-dim); font-size:.9rem; margin:0 0 1.1rem; }
 .record-tag{
   display:inline-block; font-family:var(--f-mono); font-size:.68rem;
-  letter-spacing:.08em; color:var(--tape); background:var(--void-2);
+  letter-spacing:.08em; color:var(--tape); background:rgba(27,28,31,.75);
   border:1px solid var(--line); padding:.25rem .6rem; border-radius:20px;
+  backdrop-filter:blur(2px);
 }
 
 /* International medalist — pinned, distinct */
-.card-record-intl{
-  border-color:var(--caution);
-  background:linear-gradient(160deg, #241d10, var(--void) 55%);
-}
+.card-record-intl{ border-color:var(--caution); }
 .card-record-intl:hover{ border-color:var(--caution); }
+.card-record-intl .record-bg::after{
+  background:linear-gradient(180deg, rgba(36,29,16,.25) 0%, rgba(36,29,16,.55) 45%, rgba(20,16,8,.94) 100%);
+}
 .record-intl-badge{
   display:inline-block; font-size:.62rem; letter-spacing:.14em;
   color:var(--void); background:var(--caution);
@@ -418,6 +434,8 @@ body.is-loaded .reveal[data-delay="6"]{ animation-delay:.9s; }
    ROUND 03 — THE GRIND (training snaps / highlights)
    ========================================================= */
 .round-grind{ background:var(--void); }
+
+
 
 .grind-top-row{
   display:flex; align-items:center; justify-content:space-between; gap:1rem;
@@ -474,27 +492,28 @@ body.is-loaded .reveal[data-delay="6"]{ animation-delay:.9s; }
 .grind-media{
   position:absolute; inset:0; transition:transform .5s var(--ease);
   display:flex; align-items:center; justify-content:center; gap:.5rem;
-  background:var(--void-2);
+  background:var(--void-2); overflow:hidden;
 }
-/* Placeholder textures — swap each for a real background-image / <img> / <video> poster */
-.grind-ph-1{ background:linear-gradient(150deg,#1b2a20,#101112); }
-.grind-ph-2{ background:linear-gradient(150deg,#241d10,#101112); }
-.grind-ph-3{ background:linear-gradient(150deg,#1a1c22,#101112); }
-.grind-ph-4{ background:linear-gradient(150deg,#152a1c,#101112); }
-.grind-ph-5{ background:linear-gradient(150deg,#221d12,#101112); }
-.grind-ph-6{ background:linear-gradient(150deg,#1c2016,#101112); }
-.grind-ph-7{ background:linear-gradient(150deg,#151f2a,#101112); }
-.grind-ph-8{ background:linear-gradient(150deg,#231a1e,#101112); }
-.grind-ph-9{ background:linear-gradient(150deg,#1e2414,#101112); }
-.grind-ph-10{ background:linear-gradient(150deg,#231512,#101112); }
-.grind-ph-11{ background:linear-gradient(150deg,#12232a,#101112); }
-.grind-ph-12{ background:linear-gradient(150deg,#201a24,#101112); }
+/* Photos/video load from /Media (JPEG posters + MP4 clips), referenced directly in the HTML */
+.grind-media img,
+.grind-media video{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; z-index:0;
+}
+.grind-play, .grind-duration{ position:relative; z-index:1; }
+
+/* Tiles with a real, playable clip: hand off to native video controls
+   instead of the decorative play icon, so clicks actually hit the player */
+.grind-tile.has-video .grind-media{ cursor:default; }
+.grind-tile.has-video video{ pointer-events:auto; }
+.grind-tile.has-video figcaption{ pointer-events:none; }
 
 .grind-play{
   width:44px; height:44px; border-radius:50%; background:rgba(239,233,224,.14);
   border:1px solid rgba(239,233,224,.35); color:var(--tape);
   display:flex; align-items:center; justify-content:center; font-size:.85rem;
   backdrop-filter:blur(3px); transition:background .2s var(--ease), transform .2s var(--ease);
+  pointer-events:none;
 }
 .grind-tile:hover .grind-play{ background:var(--brand); border-color:var(--brand); transform:scale(1.08); }
 .grind-duration{

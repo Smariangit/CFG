@@ -9,14 +9,7 @@
   const plWord = document.getElementById("plWord");
 
   function runPreloader(){
-    const skip = sessionStorage.getItem("cfg_seen");
     let n = 3;
-
-    if (skip) {
-      // already seen this session — short version
-      finishLoad();
-      return;
-    }
 
     const tick = () => {
       if (n <= 0) {
@@ -43,7 +36,6 @@
   function finishLoad(){
     preloader.classList.add("is-hidden");
     document.body.classList.add("is-loaded");
-    sessionStorage.setItem("cfg_seen", "1");
   }
 
   window.addEventListener("load", runPreloader);
@@ -350,13 +342,9 @@
     }
   }
 
-  /* ---- Google Apps Script — free-demo notification to the owner ---- */
-  // Deploy appscript/Code.gs as a Web App (Deploy → New deployment → Web app,
-  // execute as yourself, access "Anyone"), then paste the resulting URL below.
-  
   //Owner = Sparsh
   //const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzEZTNDNyu2hUEb4ApoX09zIVEBtMSCUw5WC-bW08f7phl193hbOxaSUQjCIYxcGu9-/exec";
-  //Owner = Manoj
+  //Owner = MKG
   const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxmynezCS_nEL3itjvW0OurdYuSeAGXuVMTIX8ZWtmGA2wms34hJ_kydOEFHniE8z6P/exec";
 
   function notifyOwnerOfDemoBooking(payload){
