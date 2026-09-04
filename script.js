@@ -249,9 +249,10 @@
      ============================================================ */
   function attachDragScroll(track){
     if (!track) return;
-    let isDown = false, startX, scrollLeft;
+    let isDown = false, startX, scrollLeft, moved = false;
     track.addEventListener("mousedown", (e) => {
       isDown = true;
+      moved = false;
       startX = e.pageX - track.offsetLeft;
       scrollLeft = track.scrollLeft;
     });
@@ -260,11 +261,99 @@
       if (!isDown) return;
       e.preventDefault();
       const x = e.pageX - track.offsetLeft;
-      track.scrollLeft = scrollLeft - (x - startX) * 1.4;
+      const walk = x - startX;
+      if (Math.abs(walk) > 6) moved = true;
+      track.scrollLeft = scrollLeft - walk * 1.4;
     });
+    // A drag ends in a mouseup over whatever image is under the cursor, which
+    // would otherwise fire that image's click handler and pop the lightbox
+    // open mid-scroll. Swallow that one click (capture phase, so it never
+    // reaches the image) whenever the gesture actually moved the track.
+    track.addEventListener("click", (e) => {
+      if (moved) {
+        e.stopPropagation();
+        e.preventDefault();
+        moved = false;
+      }
+    }, true);
   }
   attachDragScroll(document.getElementById("wallTrack"));
   attachDragScroll(document.getElementById("grindTrack"));
+
+  /* ============================================================
+     THE GARAGE — background photo slideshow
+     Each slide fades out to fully transparent before the next one
+     fades in, so the swinging bags are visible alone in the gap.
+     ============================================================ */
+  (() => {
+    const slides = document.querySelectorAll("#garageSlideshow .visual-slide");
+    if (slides.length < 2) return;
+
+    const HOLD = 3200; // ms a photo stays fully visible
+    const GAP = 1200;  // ms the bags are visible alone between photos
+    let current = 0;
+
+    setInterval(() => {
+      slides[current].classList.remove("is-active");
+      setTimeout(() => {
+        current = (current + 1) % slides.length;
+        slides[current].classList.add("is-active");
+      }, GAP);
+    }, HOLD + GAP);
+  })();
+
+  /* ============================================================
+     IMAGE PREVIEW LIGHTBOX — click any photo to view it full-size
+     ============================================================ */
+  (() => {
+    const lightbox = document.getElementById("lightboxOverlay");
+    if (!lightbox) return;
+
+    const lightboxImg = document.getElementById("lightboxImg");
+    const lightboxCaption = document.getElementById("lightboxCaption");
+    const lightboxClose = document.getElementById("lightboxClose");
+    const lightboxPrev = document.getElementById("lightboxPrev");
+    const lightboxNext = document.getElementById("lightboxNext");
+    const images = Array.from(document.querySelectorAll("img.lightbox-img"));
+    let currentIndex = -1;
+
+    function captionFor(img){
+      // Prefer the tile/card's own caption text; fall back to the image's alt text
+      const host = img.closest("figure, article");
+      const cap = host && (host.querySelector("figcaption") || host.querySelector("h3"));
+      return (cap ? cap.textContent : img.alt || "").trim();
+    }
+
+    function open(index){
+      if (!images.length) return;
+      currentIndex = (index + images.length) % images.length;
+      const img = images[currentIndex];
+      lightboxImg.src = img.currentSrc || img.src;
+      lightboxImg.alt = img.alt || "";
+      lightboxCaption.textContent = captionFor(img);
+      lightbox.classList.add("is-open");
+      lightbox.setAttribute("aria-hidden", "false");
+    }
+
+    function close(){
+      lightbox.classList.remove("is-open");
+      lightbox.setAttribute("aria-hidden", "true");
+    }
+
+    images.forEach((img, i) => img.addEventListener("click", () => open(i)));
+
+    lightboxClose.addEventListener("click", close);
+    lightboxNext.addEventListener("click", () => open(currentIndex + 1));
+    lightboxPrev.addEventListener("click", () => open(currentIndex - 1));
+    lightbox.addEventListener("click", (e) => { if (e.target === lightbox) close(); });
+
+    document.addEventListener("keydown", (e) => {
+      if (!lightbox.classList.contains("is-open")) return;
+      if (e.key === "Escape") close();
+      if (e.key === "ArrowRight") open(currentIndex + 1);
+      if (e.key === "ArrowLeft") open(currentIndex - 1);
+    });
+  })();
 
   /* ============================================================
      BOOKING FORM SUBMIT

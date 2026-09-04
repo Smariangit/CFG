@@ -141,6 +141,13 @@
         <div class="visual-bagline">
           <div class="bag"></div><div class="bag"></div><div class="bag"></div>
         </div>
+        <!-- Slideshow — cycles through Media/Garage Floor *.jpg; the bags peek
+             through during each crossfade. Add more <img> tags to extend it. -->
+        <div class="visual-slideshow" id="garageSlideshow" aria-hidden="true">
+          <img class="visual-slide is-active" src="Media/Gym.jpg" alt="">
+          <img class="visual-slide" src="Media/Gym3.jpg" alt="">
+		  <img class="visual-slide" src="Media/Gym2.jpg" alt="">
+        </div>
         <div class="visual-tape-strip mono">CFG · GARAGE FLOOR · Lucknow</div>
       </div>
     </div>
@@ -159,7 +166,7 @@
     <div class="wall-track" id="wallTrack">
 
       <article class="card-record card-record-intl reveal-on-scroll">
-        <span class="record-intl-badge mono">INTERNATIONAL AMATEUR MMA</span><div class="record-bg"><img src="Media/International-bronze1.jpg" alt="" loading="lazy"></div>
+        <span class="record-intl-badge mono">INTERNATIONAL AMATEUR MMA</span><div class="record-bg"><img class="lightbox-img" src="Media/International-bronze1.jpg" alt="" loading="lazy"></div>
         <h3>     </h3>
 		<h3>     </h3>
 		<h3>     </h3>
@@ -168,63 +175,63 @@
       </article>
 
       <article class="card-record reveal-on-scroll">
-        <div class="record-bg"><img src="Media/International-bronze.jpg" alt="" loading="lazy"></div>
+        <div class="record-bg"><img class="lightbox-img" src="Media/International-bronze.jpg" alt="" loading="lazy"></div>
         <span class="record-year mono">2025</span>
         <h3>National MMA Championship - Gold</h3>
         <p>Third national title for the amateur female mma Championship.</p>
       </article>
 	  
 	  <article class="card-record reveal-on-scroll">
-        <div class="record-bg"><img src="Media/state-boxing-gold.jpg" alt="" loading="lazy"></div>
+        <div class="record-bg"><img class="lightbox-img" src="Media/state-boxing-gold.jpg" alt="" loading="lazy"></div>
         <span class="record-year mono">2025</span>
         <h3>State Boxing Championship - Gold</h3>
         <p>Welterweight division. Third title for the CFG boxing squad in four years.</p>
       </article>
 		
 		<article class="card-record reveal-on-scroll">
-        <div class="record-bg"><img src="Media/State-gold.jpg" alt="" loading="lazy"></div>
+        <div class="record-bg"><img class="lightbox-img" src="Media/State-gold.jpg" alt="" loading="lazy"></div>
         <span class="record-year mono">2026</span>
         <h3>National Heavyweight MMA- Gold</h3>
         <p>Two golds, one silver across light-heavyweight brackets.</p>
       </article>
 	
       <article class="card-record reveal-on-scroll">
-        <div class="record-bg"><img src="Media/Inter-gym-3.jpg" alt="" loading="lazy"></div>
+        <div class="record-bg"><img class="lightbox-img" src="Media/Inter-gym-3.jpg" alt="" loading="lazy"></div>
         <span class="record-year mono">2026</span>
         <h3>Regional Heavyweight MMA- Gold</h3>
         <p>Two golds, one silver across light-heavyweight brackets.</p>
       </article>
 
       <article class="card-record reveal-on-scroll">
-        <div class="record-bg"><img src="Media/Inter-gym.jpg" alt="" loading="lazy"></div>
+        <div class="record-bg"><img class="lightbox-img" src="Media/Inter-gym.jpg" alt="" loading="lazy"></div>
         <span class="record-year mono">2026</span>
         <h3>Regional Lightweight MMA- Gold</h3>
         <p>Gold in Regional Lightweight MMA Championship.</p>
       </article>
 
       <article class="card-record reveal-on-scroll">
-        <div class="record-bg"><img src="Media/Inter-gym-2.jpg" alt="" loading="lazy"></div>
+        <div class="record-bg"><img class="lightbox-img" src="Media/Inter-gym-2.jpg" alt="" loading="lazy"></div>
         <span class="record-year mono">2026</span>
         <h3>Inter-Club Boxing League - Champions</h3>
         <p>CFG's team took the league title across a 6-club roster.</p>
       </article>
 	  
 	  <article class="card-record reveal-on-scroll">
-        <div class="record-bg"><img src="Media/inter-club-mma.jpg" alt="" loading="lazy"></div>
+        <div class="record-bg"><img class="lightbox-img" src="Media/inter-club-mma.jpg" alt="" loading="lazy"></div>
         <span class="record-year mono">2026</span>
         <h3>Inter-Club Boxing League - Champions</h3>
         <p>CFG's team took the league title across a 6-club roster.</p>
       </article>
 
       <article class="card-record reveal-on-scroll">
-        <div class="record-bg"><img src="Media/State Grappling Invitational.jpg" alt="" loading="lazy"></div>
+        <div class="record-bg"><img class="lightbox-img" src="Media/State Grappling Invitational.jpg" alt="" loading="lazy"></div>
         <span class="record-year mono">2026</span>
         <h3>State Grappling Invitational - Gold</h3>
         <p>Two CFG members topped the podium in the no-gi division.</p>
       </article>
 
       <article class="card-record reveal-on-scroll">
-        <div class="record-bg"><img src="Media/sunrise-batch.jpg" alt="" loading="lazy"></div>
+        <div class="record-bg"><img class="lightbox-img" src="Media/sunrise-batch.jpg" alt="" loading="lazy"></div>
         <span class="record-year mono">2026</span>
         <h3>City Strength Meet - Best Gym Team</h3>
       </article>
@@ -250,6 +257,9 @@
       <button type="button" class="grind-filter" data-filter="photo">Photos</button>
       <button type="button" class="grind-filter" data-filter="video">Clips</button>
     </div>
+    <a href="gallery.html" class="btn btn-ghost btn-gallery">
+      <span>View Full Gallery →</span>
+    </a>
   </div>
 
   <div class="grind-track-wrap">
@@ -257,21 +267,21 @@
 		
 	<figure class="grind-tile reveal-on-scroll" data-type="photo">
         <div class="grind-media">
-          <img src="Media/grind-4.jpg" alt="Cooldown & mobility work" loading="lazy">
+          <img class="lightbox-img" src="Media/grind-4.jpg" alt="Cooldown & mobility work" loading="lazy">
         </div>
         <figcaption>Cooldown &amp; mobility work ft Coach Manoj</figcaption>
       </figure>	
 	
 	<figure class="grind-tile reveal-on-scroll" data-type="photo">
         <div class="grind-media">
-          <img src="Media/grind-7.jpg" alt="First class nerves, week one" loading="lazy">
+          <img class="lightbox-img" src="Media/grind-7.jpg" alt="First class nerves, week one" loading="lazy">
         </div>
         <figcaption>Grind on a Global Stage ft Pooja Gautam</figcaption>
       </figure>
 	  
       <figure class="grind-tile reveal-on-scroll" data-type="photo">
         <div class="grind-media">
-          <img src="Media/grind-8.jpg" alt="Sunrise conditioning batch" loading="lazy">
+          <img class="lightbox-img" src="Media/grind-8.jpg" alt="Sunrise conditioning batch" loading="lazy">
         </div>
         <figcaption>Grind on National Stage ft Pooja Gautam</figcaption>
       </figure>
@@ -288,21 +298,21 @@
 	  
 	  <figure class="grind-tile reveal-on-scroll" data-type="photo">
         <div class="grind-media">
-          <img src="Media/grind-9.jpg" alt="First class nerves, week one" loading="lazy">
+          <img class="lightbox-img" src="Media/grind-12.jpg" alt="First class nerves, week one" loading="lazy">
         </div>
-        <figcaption>Gym Circuit Grind</figcaption>
+        <figcaption>Strength Floor, Heavy Day</figcaption>
       </figure>
 	  
 	  <figure class="grind-tile reveal-on-scroll" data-type="photo">
         <div class="grind-media">
-          <img src="Media/grind-10.jpg" alt="First class nerves, week one" loading="lazy">
+          <img class="lightbox-img" src="Media/grind-10.jpg" alt="First class nerves, week one" loading="lazy">
         </div>
         <figcaption>Padding Grind with Coach Rahul</figcaption>
       </figure>
 	  
 	  <figure class="grind-tile reveal-on-scroll" data-type="photo">
         <div class="grind-media">
-          <img src="Media/grind-1.jpg" alt="First class nerves, week one" loading="lazy">
+          <img class="lightbox-img" src="Media/grind-1.jpg" alt="First class nerves, week one" loading="lazy">
         </div>
         <figcaption>First class nerves, week one</figcaption>
       </figure>
@@ -319,14 +329,14 @@
 
       <figure class="grind-tile reveal-on-scroll" data-type="photo">
         <div class="grind-media">
-          <img src="Media/grind-5.jpg" alt="Hand-wrap ritual, pre-session" loading="lazy">
+          <img class="lightbox-img" src="Media/grind-5.jpg" alt="Hand-wrap ritual, pre-session" loading="lazy">
         </div>
         <figcaption>Inter-club MMA competition - kids edition</figcaption>
       </figure>
 
       <figure class="grind-tile reveal-on-scroll" data-type="photo">
         <div class="grind-media">
-          <img src="Media/grind-3.jpg" alt="Strength floor, heavy day" loading="lazy">
+          <img class="lightbox-img" src="Media/grind-3.jpg" alt="Strength floor, heavy day" loading="lazy">
         </div>
         <figcaption>Strength floor, heavy day</figcaption>
       </figure>
@@ -695,6 +705,17 @@
   </div>
 </div>
 
+<!-- ================= IMAGE PREVIEW LIGHTBOX ================= -->
+<div class="lightbox-overlay" id="lightboxOverlay" aria-hidden="true">
+  <button class="lightbox-close" id="lightboxClose" aria-label="Close preview">&times;</button>
+  <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous photo">&#8249;</button>
+  <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next photo">&#8250;</button>
+  <figure class="lightbox-figure">
+    <img id="lightboxImg" src="" alt="">
+    <figcaption id="lightboxCaption"></figcaption>
+  </figure>
+</div>
+
 <!-- ================= FOOTER - THE CORNER ================= -->
 <footer class="footer" id="corner">
   <div class="footer-bell-row">
@@ -731,6 +752,8 @@
   <div class="footer-bottom mono">
     <span>© <span id="year"></span> Combat Fitness Garage</span>
     <span>Built in the garage, not a boardroom.</span>
+    <!-- TODO: swap these two hrefs for your real LinkedIn / portfolio URLs -->
+    <span class="footer-credit">Site by <a href="https://smariangit.github.io/Portfolio/" target="_blank" rel="noopener">Sparsh</a></span>
   </div>
 </footer>
 

@@ -358,10 +358,26 @@ body.is-loaded .reveal[data-delay="6"]{ animation-delay:.9s; }
 .bag:nth-child(2){ animation-delay:.5s; height:150px; }
 .bag:nth-child(3){ animation-delay:1s; height:100px; }
 @keyframes swing{ 0%,100%{ transform:rotate(-4deg); } 50%{ transform:rotate(4deg); } }
+
+/* Photo slideshow — sits above the bags; each slide fades to fully
+   transparent between photos, so the swinging bags show through the gap */
+.visual-slideshow{ position:absolute; inset:0; z-index:2; }
+.visual-slide{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; opacity:0;
+  transition:opacity 1s var(--ease);
+}
+.visual-slide.is-active{ opacity:1; }
+.visual-slideshow::after{
+  content:""; position:absolute; inset:0; z-index:3; pointer-events:none;
+  background:linear-gradient(180deg, rgba(19,19,21,0) 55%, rgba(19,19,21,.85) 100%);
+}
+
 .visual-tape-strip{
-  position:absolute; bottom:1.2rem; left:50%; transform:translateX(-50%);
-  font-size:.68rem; letter-spacing:.18em; color:var(--concrete);
+  position:absolute; z-index:4; bottom:1.2rem; left:50%; transform:translateX(-50%);
+  font-size:.62rem; letter-spacing:.13em; color:var(--concrete);
   background:var(--void); padding:.35rem .8rem; border:1px solid var(--line); border-radius:2px;
+  white-space:nowrap; max-width:calc(100% - 2rem); overflow:hidden; text-overflow:ellipsis;
 }
 
 /* =========================================================
@@ -397,7 +413,7 @@ body.is-loaded .reveal[data-delay="6"]{ animation-delay:.9s; }
   transition:transform .5s var(--ease);
 }
 .record-bg::after{
-  content:""; position:absolute; inset:0;
+  content:""; position:absolute; inset:0; pointer-events:none;
   background:linear-gradient(180deg, rgba(19,19,21,.25) 0%, rgba(19,19,21,.55) 45%, rgba(15,16,18,.94) 100%);
 }
 .card-record > *:not(.record-bg){ position:relative; z-index:1; }
@@ -689,6 +705,60 @@ body.is-loaded .reveal[data-delay="6"]{ animation-delay:.9s; }
 .modal-box p{ color:var(--tape-dim); font-size:.94rem; margin:0 0 1.6rem; }
 
 /* =========================================================
+   IMAGE PREVIEW LIGHTBOX — click any photo to view it full-size
+   ========================================================= */
+img.lightbox-img{ cursor:pointer; }
+
+.lightbox-overlay{
+  position:fixed; inset:0; z-index:190; background:rgba(10,10,11,.92);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; visibility:hidden; transition:opacity .3s var(--ease), visibility .3s var(--ease);
+  padding:2rem;
+}
+.lightbox-overlay.is-open{ opacity:1; visibility:visible; }
+
+.lightbox-figure{
+  max-width:min(90vw, 1100px); max-height:88vh; margin:0;
+  display:flex; flex-direction:column; align-items:center; gap:1rem;
+  transform:scale(.96); transition:transform .35s var(--ease-out-back);
+}
+.lightbox-overlay.is-open .lightbox-figure{ transform:scale(1); }
+.lightbox-figure img{
+  max-width:100%; max-height:76vh; object-fit:contain;
+  border-radius:6px; border:1px solid var(--line);
+  box-shadow:0 30px 60px -20px rgba(0,0,0,.6);
+}
+.lightbox-figure figcaption{
+  font-family:var(--f-cond); font-size:.95rem; color:var(--tape-dim);
+  text-align:center; letter-spacing:.02em;
+}
+
+.lightbox-close, .lightbox-nav{
+  position:absolute; z-index:2;
+  background:rgba(27,28,31,.8); border:1px solid var(--line); color:var(--tape);
+  border-radius:50%; display:flex; align-items:center; justify-content:center;
+  transition:background .2s var(--ease), border-color .2s var(--ease), transform .2s var(--ease);
+}
+.lightbox-close:hover, .lightbox-nav:hover{ background:var(--brand); border-color:var(--brand); }
+
+.lightbox-close{
+  top:1.4rem; right:1.6rem; width:44px; height:44px; font-size:1.7rem; line-height:1;
+}
+.lightbox-close:hover{ transform:rotate(90deg); }
+
+.lightbox-nav{ top:50%; transform:translateY(-50%); width:48px; height:48px; font-size:1.9rem; line-height:1; }
+.lightbox-nav:hover{ transform:translateY(-50%) scale(1.08); }
+.lightbox-prev{ left:1.6rem; }
+.lightbox-next{ right:1.6rem; }
+
+@media (max-width: 680px){
+  .lightbox-nav{ width:40px; height:40px; font-size:1.5rem; }
+  .lightbox-prev{ left:.6rem; }
+  .lightbox-next{ right:.6rem; }
+  .lightbox-close{ top:.8rem; right:.8rem; width:38px; height:38px; }
+}
+
+/* =========================================================
    FOOTER — THE CORNER
    ========================================================= */
 .footer{ background:var(--void); border-top:1px solid var(--line); padding:3.2rem clamp(1.25rem,4vw,3rem) 1.6rem; }
@@ -712,6 +782,8 @@ body.is-loaded .reveal[data-delay="6"]{ animation-delay:.9s; }
   max-width:var(--container); margin:1.4rem auto 0; display:flex; justify-content:space-between;
   font-size:.72rem; color:var(--concrete-lo); flex-wrap:wrap; gap:.6rem;
 }
+.footer-credit a{ color:var(--concrete-lo); text-decoration:underline; text-underline-offset:2px; transition:color .2s var(--ease); }
+.footer-credit a:hover{ color:var(--brand-hi); }
 
 /* =========================================================
    RESPONSIVE
