@@ -434,7 +434,7 @@
   //Owner = Sparsh
   //const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzEZTNDNyu2hUEb4ApoX09zIVEBtMSCUw5WC-bW08f7phl193hbOxaSUQjCIYxcGu9-/exec";
   //Owner = MKG
-  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxmynezCS_nEL3itjvW0OurdYuSeAGXuVMTIX8ZWtmGA2wms34hJ_kydOEFHniE8z6P/exec";
+  const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyUAVWiQpvkKdxliYZxolzPM5t3n2-FTokMiB0NsuoP5BH7eM8xUHWX9h9SZMU5AoIZ/exec";
 
   function notifyOwnerOfDemoBooking(payload){
     if (!APPS_SCRIPT_URL || APPS_SCRIPT_URL.indexOf("PASTE_YOUR") === 0) return;
